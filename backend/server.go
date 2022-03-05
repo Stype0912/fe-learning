@@ -28,7 +28,7 @@ func signIn(w http.ResponseWriter, request *http.Request) {
 	var userInfo UserInfo
 	var responseInfo ResponseInfo
 
-	decoder.Decode(&userInfo)
+	_ = decoder.Decode(&userInfo)
 
 	db, err := sql.Open("mysql", "root:tang2000912@tcp(127.0.0.1:3306)/user_info?charset=utf8")
 	if err != nil {
@@ -36,7 +36,8 @@ func signIn(w http.ResponseWriter, request *http.Request) {
 	}
 
 	var user_name, password string
-	db.QueryRow("SELECT user_name, password FROM user_information WHERE user_name = ?", userInfo.UserName).Scan(&user_name, &password)
+	_ = db.QueryRow("SELECT user_name, password FROM user_information WHERE user_name = ?", userInfo.UserName).Scan(&user_name, &password)
+
 	if user_name == "" {
 		responseInfo.IsPass = "尚未注册，请先注册"
 	} else {
@@ -60,7 +61,7 @@ func signUp(w http.ResponseWriter, request *http.Request) {
 	var userInfo UserInfo
 	var responseInfo ResponseInfo
 
-	decoder.Decode(&userInfo)
+	_ = decoder.Decode(&userInfo)
 
 	db, err := sql.Open("mysql", "root:tang2000912@tcp(127.0.0.1:3306)/user_info?charset=utf8")
 	if err != nil {
@@ -68,7 +69,7 @@ func signUp(w http.ResponseWriter, request *http.Request) {
 	}
 
 	var user_name, password string
-	db.QueryRow("SELECT user_name, password FROM user_information WHERE user_name = ?", userInfo.UserName).Scan(&user_name, &password)
+	_ = db.QueryRow("SELECT user_name, password FROM user_information WHERE user_name = ?", userInfo.UserName).Scan(&user_name, &password)
 	if user_name != "" {
 		responseInfo.IsPass = "已注册，请登陆"
 	} else {
@@ -93,5 +94,5 @@ func Encode(password string) (encodedPassword string) {
 func main() {
 	http.HandleFunc("/signin", signIn)
 	http.HandleFunc("/signup", signUp)
-	http.ListenAndServe(":8090", nil)
+	_ = http.ListenAndServe(":8090", nil)
 }
