@@ -1,0 +1,10 @@
+output/
+*.vscode/
+.idea/
+run.log
+.DS_Store
+.xml
+result.html
+script/*.txt
+*.difftxt
+node_modules
