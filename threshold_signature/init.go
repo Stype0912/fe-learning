@@ -1,7 +1,6 @@
 package threshold_signature
 
 import (
-	"github.com/fe-learning/util"
 	"math/big"
 )
 
@@ -35,7 +34,7 @@ func init() {
 	n, _ = new(big.Int).SetString("38088155963987848448833", 10)
 	m, _ = new(big.Int).SetString("9522038990899381156117", 10)
 	e = big.NewInt(17)
-	d = util.Inverse(e, m)
+	d = new(big.Int).ModInverse(e, m)
 	//fmt.Println(p.ProbablyPrime(10), q.ProbablyPrime(10), p_hat.ProbablyPrime(10), q_hat.ProbablyPrime(10))
 	//n = new(big.Int).Mul(p, q)
 	//m = new(big.Int).Mul(p_hat, q_hat)
