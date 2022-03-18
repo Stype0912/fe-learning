@@ -2,7 +2,7 @@ package threshold_signature
 
 import "math/big"
 
-func verify(y *big.Int) bool {
+func Verify(x, y *big.Int) bool {
 	fai := new(big.Int).Exp(y, e, n)
 	//t.Log(fai)
 

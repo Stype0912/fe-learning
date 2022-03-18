@@ -1,6 +1,9 @@
 package threshold_signature
 
 import (
+	"crypto/sha256"
+	"fmt"
+	"math/big"
 	"testing"
 )
 
@@ -24,8 +27,8 @@ func TestSign(t *testing.T) {
 	//	t.Log(new(big.Int).Mod(test2, m))
 	//	t.FailNow()
 	//}
-
-	X := sign()
-	y := combine(X)
-	t.Log(verify(y))
+	x, _ := new(big.Int).SetString(fmt.Sprintf("%x", sha256.Sum256([]byte("320282200009128411"))), 16)
+	X := Sign(x)
+	y := Combine(x, X)
+	t.Log(Verify(x, y))
 }

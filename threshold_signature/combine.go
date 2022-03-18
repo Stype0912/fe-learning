@@ -1,11 +1,11 @@
 package threshold_signature
 
 import (
-	"github.com/fe-learning/util"
+	"github.com/Stype0912/fe-learning/util"
 	"math/big"
 )
 
-func combine(X map[int]*big.Int) *big.Int {
+func Combine(x *big.Int, X map[int]*big.Int) *big.Int {
 	w := big.NewInt(1)
 	for _, Si := range S {
 		//t.Log(Si)

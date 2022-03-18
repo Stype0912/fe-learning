@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func sign() map[int]*big.Int {
+func Sign(x *big.Int) map[int]*big.Int {
 	//x, _ := new(big.Int).SetString(fmt.Sprintf("%x", sha256.Sum256([]byte(M))), 16)
 	//t.Log(x)
 

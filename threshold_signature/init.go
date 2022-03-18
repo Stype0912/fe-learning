@@ -1,7 +1,6 @@
 package threshold_signature
 
 import (
-	"crypto/sha256"
 	"fmt"
 	"math/big"
 	"math/rand"
@@ -20,8 +19,9 @@ var a map[int]*big.Int
 var lambda map[int]map[int]*big.Int
 var S, SOut []int
 var s, VK map[int]*big.Int
-var M = "320282200009128411"
-var x *big.Int
+
+//var M = "320282200009128411"
+//var x *big.Int
 
 func init() {
 	//file, err := os.Open("big_prime1.txt")
@@ -43,7 +43,7 @@ func init() {
 	//	}
 	//}
 	//fmt.Printf("p:%v,q:%v,p':%v,q':%v,m:%v,n:%v", p, q, p_hat, q_hat, m, n)
-	x, _ = new(big.Int).SetString(fmt.Sprintf("%x", sha256.Sum256([]byte(M))), 16)
+	//x, _ = new(big.Int).SetString(fmt.Sprintf("%x", sha256.Sum256([]byte(M))), 16)
 	p, _ = new(big.Int).SetString("195035409467", 10)
 	p_hat, _ = new(big.Int).SetString("97517704733", 10)
 	q, _ = new(big.Int).SetString("195288414899", 10)
