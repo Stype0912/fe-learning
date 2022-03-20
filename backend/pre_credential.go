@@ -16,6 +16,12 @@ type Claim struct {
 	Cv *big.Int
 }
 
+type PreCredential struct {
+	claim    *Claim
+	pkU      *rsa.PublicKey
+	piOracle *big.Int
+}
+
 var Pk *rsa.PublicKey
 var sk *rsa.PrivateKey
 
@@ -29,7 +35,7 @@ func init() {
 	Pk = &sk.PublicKey
 }
 
-func PreCredentialGen() {
+func PreCredentialGen() PreCredential {
 	a := "id"
 	v, _ := new(big.Int).SetString("320282200009128411", 10)
 	r := new(big.Int).Rand(rand.New(rand.NewSource(time.Now().Unix())), commitment.Q)
@@ -39,14 +45,11 @@ func PreCredentialGen() {
 		Cv: Cv,
 	}
 
-	PC := struct {
-		claim    *Claim
-		pkU      *rsa.PublicKey
-		piOracle *big.Int
-	}{
+	PC := PreCredential{
 		claim:    claim,
 		pkU:      Pk,
 		piOracle: threshold_signature.Combine(claim.Cv, threshold_signature.Sign(claim.Cv)),
 	}
-	fmt.Printf("%v", PC)
+	return PC
+	//fmt.Printf("%v", PC)
 }

@@ -1,7 +1,12 @@
 package main
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 func TestPre(t *testing.T) {
-	PreCredentialGen()
+	PC := PreCredentialGen()
+	credStr, err := json.Marshal(PC)
+	t.Log(string(credStr), err)
 }
