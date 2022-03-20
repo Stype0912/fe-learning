@@ -2,7 +2,7 @@ package bob
 
 import (
 	"fmt"
-	"github.com/fe-learning/millionaire/constant"
+	"github.com/Stype0912/fe-learning/millionaire/constant"
 	"math/big"
 )
 

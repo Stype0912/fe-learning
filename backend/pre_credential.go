@@ -48,5 +48,5 @@ func PreCredentialGen() {
 		pkU:      Pk,
 		piOracle: threshold_signature.Combine(claim.Cv, threshold_signature.Sign(claim.Cv)),
 	}
-	fmt.Printf("%v", PC.piOracle)
+	fmt.Printf("%v", PC)
 }

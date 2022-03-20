@@ -1,8 +1,8 @@
 package millionaire
 
 import (
-	"github.com/fe-learning/millionaire/alice"
-	"github.com/fe-learning/millionaire/bob"
+	"github.com/Stype0912/fe-learning/millionaire/alice"
+	"github.com/Stype0912/fe-learning/millionaire/bob"
 	"math/big"
 	"testing"
 )

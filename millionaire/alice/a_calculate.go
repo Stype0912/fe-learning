@@ -2,8 +2,8 @@ package alice
 
 import (
 	"fmt"
-	"github.com/fe-learning/millionaire/constant"
-	my_rsa "github.com/fe-learning/rsa"
+	"github.com/Stype0912/fe-learning/millionaire/constant"
+	my_rsa "github.com/Stype0912/fe-learning/rsa"
 	"math/big"
 )
 

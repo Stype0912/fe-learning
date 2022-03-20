@@ -1,7 +1,6 @@
 package threshold_signature
 
 import (
-	"fmt"
 	"math/big"
 	"math/rand"
 	"time"
@@ -66,7 +65,7 @@ func init() {
 	s = make(map[int]*big.Int)
 	for i := 0; i <= l; i++ {
 		s[i] = new(big.Int).Mod(f(i), m)
-		fmt.Printf("s[%v]: %v", i, s[i])
+		//fmt.Printf("s[%v]: %v", i, s[i])
 	}
 
 	sqrtN := new(big.Int).Sub(new(big.Int).Sqrt(n), big.NewInt(5))

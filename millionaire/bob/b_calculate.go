@@ -3,7 +3,7 @@ package bob
 import (
 	"crypto/rsa"
 	"fmt"
-	my_rsa "github.com/fe-learning/rsa"
+	my_rsa "github.com/Stype0912/fe-learning/rsa"
 	"math/big"
 )
 
