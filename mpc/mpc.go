@@ -12,7 +12,7 @@ type Node struct {
 	right *Node
 }
 
-func merkleTree(hashedLeaves []string) string {
+func MerkleTree(hashedLeaves []string) string {
 	lowerLayer := hashedLeaves
 	higherLayer := make([]string, 0)
 	for {
@@ -31,16 +31,21 @@ func merkleTree(hashedLeaves []string) string {
 	return higherLayer[0]
 }
 
-func Mpc(data []*big.Int, i int) string {
+func Mpc(data []string, i int, vi *big.Int) string {
+	data[i] = fmt.Sprintf("%x", sha256.Sum256(vi.Bytes()))
+	return MerkleTree(data)
+}
+
+func CalculateHashedLeaves(data []*big.Int, i int) []string {
 	var leaves = data
 	hashedLeaves := make([]string, 0)
 	for j, leaf := range leaves {
-		if j == i {
-			hashedLeaves = append(hashedLeaves, fmt.Sprintf("%x", leaf.Bytes()))
-		} else {
+		if j != i {
 			hashedLeaf := sha256.Sum256(leaf.Bytes())
 			hashedLeaves = append(hashedLeaves, fmt.Sprintf("%x", hashedLeaf))
+		} else {
+			hashedLeaves = append(hashedLeaves, fmt.Sprintf("%x", leaf.Bytes()))
 		}
 	}
-	return merkleTree(hashedLeaves)
+	return hashedLeaves
 }

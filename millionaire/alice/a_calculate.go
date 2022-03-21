@@ -1,7 +1,6 @@
 package alice
 
 import (
-	"fmt"
 	"github.com/Stype0912/fe-learning/millionaire/constant"
 	my_rsa "github.com/Stype0912/fe-learning/rsa"
 	"math/big"
@@ -11,7 +10,7 @@ func ACalculateZ(m, i *big.Int) (z []*big.Int) {
 	z = append(z, big.NewInt(0))
 	counter := big.NewInt(0)
 	for {
-		fmt.Println(counter)
+		//fmt.Println(counter)
 		if counter.Cmp(constant.Limit) >= 0 {
 			break
 		}
