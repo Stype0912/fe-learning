@@ -3,7 +3,6 @@ package main
 import (
 	"math/big"
 	"math/rand"
-	"time"
 )
 
 var N = int64(15)
@@ -23,7 +22,9 @@ func init() {
 	//	break
 	//}
 	for i := int64(0); i < N; i++ {
-		lambda = append(lambda, new(big.Int).Rand(rand.New(rand.NewSource(time.Now().UnixNano())), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
-		b = append(b, new(big.Int).Rand(rand.New(rand.NewSource(time.Now().UnixNano())), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
+		//r := time.Now().UnixNano()
+		r := int64(1)
+		lambda = append(lambda, new(big.Int).Rand(rand.New(rand.NewSource(r)), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
+		b = append(b, new(big.Int).Rand(rand.New(rand.NewSource(r)), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
 	}
 }

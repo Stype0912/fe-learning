@@ -12,18 +12,19 @@ import (
 )
 
 type Claim struct {
-	a  string
-	Cv *big.Int
+	A  string   `json:"a"`
+	Cv *big.Int `json:"cv"`
 }
 
 type PreCredential struct {
-	claim    *Claim
-	pkU      *rsa.PublicKey
-	piOracle *big.Int
+	Claim    *Claim         `json:"Claim"`
+	PkU      *rsa.PublicKey `json:"pk_u"`
+	PiOracle *big.Int       `json:"pi_oracle"`
 }
 
 var Pk *rsa.PublicKey
 var sk *rsa.PrivateKey
+var V *big.Int
 
 func init() {
 	var err error
@@ -37,19 +38,19 @@ func init() {
 
 func PreCredentialGen() PreCredential {
 	a := "id"
-	v, _ := new(big.Int).SetString("320282200009128411", 10)
+	V, _ = new(big.Int).SetString("320282200009128411", 10)
 	r := new(big.Int).Rand(rand.New(rand.NewSource(time.Now().Unix())), commitment.Q)
-	Cv := commitment.Commit(v, r)
+	Cv := commitment.Commit(V, r)
 	claim := &Claim{
-		a:  a,
+		A:  a,
 		Cv: Cv,
 	}
 
 	PC := PreCredential{
-		claim:    claim,
-		pkU:      Pk,
-		piOracle: threshold_signature.Combine(claim.Cv, threshold_signature.Sign(claim.Cv)),
+		Claim:    claim,
+		PkU:      Pk,
+		PiOracle: threshold_signature.Combine(claim.Cv, threshold_signature.Sign(claim.Cv)),
 	}
 	return PC
-	//fmt.Printf("%v", PC)
+	//fmt.Printf("%V", PC)
 }
