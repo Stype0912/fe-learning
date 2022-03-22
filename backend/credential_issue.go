@@ -7,7 +7,7 @@ import (
 	"math/big"
 )
 
-type CredMaster struct {
+type Credential struct {
 	Content   *M     `json:"content"`
 	Signature string `json:"signature"`
 }
@@ -27,7 +27,7 @@ type Attribute []struct {
 	Provider string `json:"provider"`
 }
 
-func CredentialIssue(pc PreCredential) *CredMaster {
+func (c *Credential) CredentialIssue(pc PreCredential) {
 	claim := pc.Claim
 	m := &M{
 		PkU:     Pk,
@@ -45,9 +45,13 @@ func CredentialIssue(pc PreCredential) *CredMaster {
 	//mStr := string(mByte)
 	sigma := threshold_signature.Sign(new(big.Int).SetBytes(mByte))
 	signature := threshold_signature.Combine(new(big.Int).SetBytes(mByte), sigma)
-	credMaster := &CredMaster{
-		Content:   m,
-		Signature: signature.String(),
-	}
-	return credMaster
+	c.Content = m
+	c.Signature = signature.String()
+	return
+}
+
+func (c *Credential) CredentialVerify() bool {
+	mByte, _ := json.Marshal(c.Content)
+	X, _ := new(big.Int).SetString(c.Signature, 10)
+	return threshold_signature.Verify(new(big.Int).SetBytes(mByte), X)
 }

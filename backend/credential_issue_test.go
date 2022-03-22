@@ -2,8 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/Stype0912/fe-learning/threshold_signature"
-	"math/big"
 	"testing"
 )
 
@@ -21,10 +19,12 @@ func TestMaster(t *testing.T) {
 		t.Log(DeduplicationCommitteeMPC(rawData, i, vi))
 	}
 
-	credMaster := CredentialIssue(PC)
+	credMaster := &Credential{}
+	credMaster.CredentialIssue(PC)
 	credStr, _ := json.Marshal(credMaster)
 	t.Log(string(credStr))
-	mByte, _ := json.Marshal(credMaster.Content)
-	X, _ := new(big.Int).SetString(credMaster.Signature, 10)
-	t.Log(threshold_signature.Verify(new(big.Int).SetBytes(mByte), X))
+	//mByte, _ := json.Marshal(credMaster.Content)
+	//X, _ := new(big.Int).SetString(credMaster.Signature, 10)
+	//t.Log(threshold_signature.Verify(new(big.Int).SetBytes(mByte), X))
+	t.Log(credMaster.CredentialVerify())
 }
