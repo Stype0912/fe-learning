@@ -18,7 +18,7 @@ func TestMaster(t *testing.T) {
 	for i := 0; i <= 10; i++ {
 		rawData[i] = ""
 		vi := DeduplicationCommitteeVi(v_hat, int64(i))
-		DeduplicationCommitteeMPC(rawData, i, vi)
+		t.Log(DeduplicationCommitteeMPC(rawData, i, vi))
 	}
 
 	credMaster := CredentialIssue(PC)

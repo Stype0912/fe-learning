@@ -21,9 +21,10 @@ func init() {
 	//	}
 	//	break
 	//}
+	r := int64(0)
 	for i := int64(0); i < N; i++ {
 		//r := time.Now().UnixNano()
-		r := int64(1)
+		r++
 		lambda = append(lambda, new(big.Int).Rand(rand.New(rand.NewSource(r)), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
 		b = append(b, new(big.Int).Rand(rand.New(rand.NewSource(r)), new(big.Int).Exp(big.NewInt(2), big.NewInt(512), nil)))
 	}
