@@ -20,11 +20,11 @@ func TestMaster(t *testing.T) {
 	}
 
 	credMaster := &Credential{}
-	credMaster.CredentialIssue(PC)
+	credMaster.MasterCredentialIssue(PC)
 	credStr, _ := json.Marshal(credMaster)
 	t.Log(string(credStr))
 	//mByte, _ := json.Marshal(credMaster.Content)
 	//X, _ := new(big.Int).SetString(credMaster.Signature, 10)
 	//t.Log(threshold_signature.Verify(new(big.Int).SetBytes(mByte), X))
-	t.Log(credMaster.CredentialVerify())
+	t.Log(credMaster.MasterCredentialVerify())
 }
