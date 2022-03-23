@@ -27,7 +27,7 @@ type Attribute []struct {
 	Provider string `json:"provider"`
 }
 
-func (c *Credential) CredentialIssue(pc PreCredential) {
+func (c *Credential) MasterCredentialIssue(pc PreCredential) {
 	claim := pc.Claim
 	m := &M{
 		PkU:     Pk,
@@ -50,7 +50,7 @@ func (c *Credential) CredentialIssue(pc PreCredential) {
 	return
 }
 
-func (c *Credential) CredentialVerify() bool {
+func (c *Credential) MasterCredentialVerify() bool {
 	mByte, _ := json.Marshal(c.Content)
 	X, _ := new(big.Int).SetString(c.Signature, 10)
 	return threshold_signature.Verify(new(big.Int).SetBytes(mByte), X)

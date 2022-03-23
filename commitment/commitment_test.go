@@ -12,5 +12,5 @@ func TestCommitment(t *testing.T) {
 	r := new(big.Int).Rand(rand.New(rand.NewSource(time.Now().Unix())), Q)
 	commitment := Commit(v, r)
 	t.Log(commitment)
-	t.Log(open(v, r, commitment))
+	t.Log(Open(v, r, commitment))
 }
