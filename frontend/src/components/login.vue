@@ -13,17 +13,10 @@
           <b-col cols="4" class="text-center"></b-col>
           <b-col cols="4" class="text-center">
             <form>
-
               <div class="field">
-                <label class="label">用户名</label>
-                <b-form-input name="userName" v-model="userName" v-validate="'required'" class="input"
-                              type="text" placeholder="输入用户名"></b-form-input>
-              </div>
-
-              <div class="field" style="margin-top:13px;">
-                <label class="label">密码</label>
-                <b-form-input type="password" name="passWord" v-model="passWord" class="input"
-                              v-validate="'required|digits'" placeholder="输入密码"></b-form-input>
+                <label class="label">用户ID</label>
+                <b-form-input name="userName" v-model="userId" v-validate="'required'" class="input"
+                              type="text" placeholder="输入ID"></b-form-input>
               </div>
             </form>
           </b-col>
@@ -32,7 +25,9 @@
         <b-row class="text-center">
           <b-col cols="4" class="text-center"></b-col>
           <b-col cols="4" class="text-center">
-            <div><label class="label">{{ isPass }}</label></div>
+            <label class="label">PkU&nbsp;:{{ pkU }}</label>
+            <label class="label">Claim&nbsp;:{{ claim }}</label>
+            <label class="label">Signature&nbsp;:{{ signature }}</label>
           </b-col>
         </b-row>
       </b-container>
@@ -40,8 +35,8 @@
 
     &nbsp;
     <div>
-      <b-button variant="primary" v-on:click="signIn()">登陆</b-button>&nbsp;&nbsp;
-      <b-button variant="primary" v-on:click="signUp()">注册</b-button>
+      <b-button variant="primary" v-on:click="masterCred()">获取Cred</b-button>
+      <!--      <b-button variant="primary" v-on:click="signUp()">注册</b-button>-->
     </div>
   </div>
 </template>
@@ -56,17 +51,17 @@ import VeeValidate from 'vee-validate'
 Vue.use(VeeValidate)
 
 export default {
-  name: 'Login',
+  name: 'User',
 
   data: function () {
     return {
-      userName: "", passWord: "", isPass: ""
+      userId: "", pkU: "", claim: {}, signature: ""
     }
   },
 
   methods: {
-    signIn: function () {
-      var data = {"user_name": this.userName, "pass_word": this.passWord}
+    masterCred: function () {
+      var data = {"id": this.userId}
 
       /*eslint-disable*/
       console.log(data)
@@ -74,48 +69,22 @@ export default {
 
       axios({
         method: "POST",
-        url: "http://127.0.0.1:8090/signin",
+        url: "http://127.0.0.1:7890/master-cred",
         data: data,
-        headers: {"content-type": "text/plain"}
+        headers: {"content-type": "text/plain"},
       }).then(result => {
-        // this.response = result.data;
-        this.isPass = result.data['is_pass']
+        this.pkU = result.data['pk_u']
+        this.claim = result.data['claim']
+        this.signature = result.data['signature']
 
         /*eslint-disable*/
         console.log(result.data)
         /*eslint-enable*/
-
       }).catch(error => {
         /*eslint-disable*/
         console.error(error);
         /*eslint-enable*/
-      });
-    },
-    signUp: function () {
-      var data = {"user_name": this.userName, "pass_word": this.passWord}
-
-      /*eslint-disable*/
-      console.log(data)
-      /*eslint-enable*/
-
-      axios({
-        method: "POST",
-        url: "http://127.0.0.1:8090/signup",
-        data: data,
-        headers: {"content-type": "text/plain"}
-      }).then(result => {
-        // this.response = result.data;
-        this.isPass = result.data['is_pass']
-
-        /*eslint-disable*/
-        console.log(result.data)
-        /*eslint-enable*/
-
-      }).catch(error => {
-        /*eslint-disable*/
-        console.error(error);
-        /*eslint-enable*/
-      });
+      })
     }
   }
 }
@@ -139,5 +108,10 @@ li {
 
 a {
   color: #42b983;
+}
+
+.label {
+  word-break: break-all;
+  white-space: normal;
 }
 </style>
